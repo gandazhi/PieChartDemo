@@ -22,6 +22,7 @@ public class PieFragemt extends Fragment {
         Bundle args = new Bundle();
 
         args.putString(DATA_KEY,data);
+
         PieFragemt fragment = new PieFragemt();
         fragment.setArguments(args);
         return fragment;
@@ -31,6 +32,7 @@ public class PieFragemt extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //获取到Arguments里传入的data
         Bundle bundle =getArguments();
         if (bundle != null) {
             mData = bundle.getString(DATA_KEY);
