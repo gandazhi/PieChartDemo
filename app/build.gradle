@@ -32,3 +32,8 @@ dependencies {
 dependencies {
     compile group:'com.google.code.gson',name:'gson',version:'2.3.1'
 }
+
+//MPAndroidChat依赖
+dependencies {
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
+}
