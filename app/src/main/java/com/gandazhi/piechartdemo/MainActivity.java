@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         vp_main.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
-                return PieFragemt.newInstance(mData.get(position)+""); //返回要显示的fragment
+                return PieFragemt.newInstance(mData.get(position)); //返回要显示的fragment
             }
 
             @Override

@@ -1,15 +1,33 @@
 package com.gandazhi.piechartdemo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
 /**
  * Created by admin on 2016/12/2.
  */
-public class MonthBean {
+public class MonthBean implements Parcelable{
 
     private String date;
     private ArrayList<PieBean> obj;
 
+    public MonthBean(Parcel in){
+        date = in.readString();
+    }
+
+    public static final Creator<MonthBean> CREATOR = new Creator<MonthBean>() {
+        @Override
+        public MonthBean createFromParcel(Parcel parcel) {
+            return new MonthBean(parcel);
+        }
+
+        @Override
+        public MonthBean[] newArray(int i) {
+            return new MonthBean[0];
+        }
+    };
     public String getDate() {
         return date;
     }
@@ -34,10 +52,20 @@ public class MonthBean {
                 '}';
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(date);
+    }
+
     class PieBean{
 
         private String title;
-        private String value;
+        private int value;
 
         public String getTitle() {
             return title;
@@ -47,11 +75,11 @@ public class MonthBean {
             this.title = title;
         }
 
-        public String getValue() {
+        public int getValue() {
             return value;
         }
 
-        public void setValue(String value) {
+        public void setValue(int value) {
             this.value = value;
         }
 
