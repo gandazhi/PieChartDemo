@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -59,7 +60,14 @@ public class PieFragemt extends Fragment {
         View inflate = inflater.inflate(R.layout.fragment_pie,null);
         mChart = (PieChart) inflate.findViewById(R.id.pc_chart);
         initView();
+        mChart.getLegend().setEnabled(false);//不显示下面的标识
 
+        //Description设置为空
+        Description description = new Description();
+        description.setText("");
+        mChart.setDescription(description);
+        //设置不许旋转
+        mChart.setRotationEnabled(true);
         return inflate;
     }
 
@@ -69,15 +77,18 @@ public class PieFragemt extends Fragment {
 
     private void setData() {
         List<String> titles = new ArrayList<>();
-        List<PieEntry> entrys = new ArrayList<>();
+        List<PieEntry> entries  = new ArrayList<>();
         for (int i = 0; i < mData.getObj().size(); i++) {
             MonthBean.PieBean pieBean = mData.getObj().get(i);
             titles.add(pieBean.getTitle());
-            entrys.add(new PieEntry(pieBean.getValue()));
+            entries.add(new PieEntry(pieBean.getValue()));
         }
 
-        PieDataSet dataSet = new PieDataSet(entrys,"");
+        PieDataSet dataSet = new PieDataSet(entries,"");
         dataSet.setColors(new int[]{Color.rgb(216, 77, 719), Color.rgb(183, 56, 63), Color.rgb(247, 85, 47)});
+        dataSet.setSliceSpace(3f);
+        dataSet.setSelectionShift(5f);
+        dataSet.setValueTextSize(15);
 
         PieData pieData = new PieData(dataSet);
         mChart.setData(pieData);
