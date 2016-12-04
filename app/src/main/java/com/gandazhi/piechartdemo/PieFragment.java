@@ -27,19 +27,19 @@ import java.util.List;
  * Created by admin on 2016/12/2.
  */
 
-public class PieFragemt extends Fragment implements OnChartValueSelectedListener {
+public class PieFragment extends Fragment implements OnChartValueSelectedListener {
 
     private static final String DATA_KEY = "PieFragment_key";
     private MonthBean mData;
     private PieChart mChart;
 
-    public static PieFragemt newInstance(MonthBean data) {
+    public static PieFragment newInstance(MonthBean data) {
 
         Bundle args = new Bundle();
 
         args.putParcelable(DATA_KEY,data);
 
-        PieFragemt fragment = new PieFragemt();
+        PieFragment fragment = new PieFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -69,7 +69,7 @@ public class PieFragemt extends Fragment implements OnChartValueSelectedListener
         description.setText("");
         mChart.setDescription(description);
         //设置不许旋转
-        mChart.setRotationEnabled(true);
+        mChart.setRotationEnabled(false);
         mChart.setOnChartValueSelectedListener(this);
         return inflate;
     }
@@ -109,6 +109,6 @@ public class PieFragemt extends Fragment implements OnChartValueSelectedListener
 
     @Override
     public void onNothingSelected() { //点击其他的地方，不显示具体数据的时候调用
-
+        
     }
 }
