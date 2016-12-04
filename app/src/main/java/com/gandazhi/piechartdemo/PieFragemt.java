@@ -69,7 +69,7 @@ public class PieFragemt extends Fragment implements OnChartValueSelectedListener
         description.setText("");
         mChart.setDescription(description);
         //设置不许旋转
-        mChart.setRotationEnabled(false);
+        mChart.setRotationEnabled(true);
         mChart.setOnChartValueSelectedListener(this);
         return inflate;
     }
@@ -99,9 +99,12 @@ public class PieFragemt extends Fragment implements OnChartValueSelectedListener
     }
 
     @Override
-    public void onValueSelected(Entry e, Highlight h) { //点击条目显示具体数据的时候调用的方法
-        float angle = 0;
+    public void onValueSelected(Entry e, Highlight h) { //点击条目显示具体数据的时候调用
+
+        int proportion = 360 / mData.getSum();
+        int angle = 90 - mData.getObj().get((int) h.getX()).getValue() / 2 * proportion - mData.getSum((int) h.getX()) * proportion;
         mChart.setRotationAngle(angle);
+
     }
 
     @Override

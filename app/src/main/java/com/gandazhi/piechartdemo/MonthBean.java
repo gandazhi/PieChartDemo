@@ -13,6 +13,7 @@ public class MonthBean implements Parcelable{
     private String date;
     private ArrayList<PieBean> obj;
 
+
     public MonthBean(Parcel in){
         date = in.readString();
     }
@@ -60,6 +61,22 @@ public class MonthBean implements Parcelable{
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(date);
+    }
+
+    public int getSum() {
+        int sum = 0;
+        for (PieBean pieBean : obj){
+            sum += pieBean.getValue();
+        }
+        return sum;
+    }
+
+    public int getSum(int index) {
+        int sum = 0;
+        for (int i = 0; i < index; i++){
+            sum +=  obj.get(i).getValue();
+        }
+        return sum;
     }
 
     class PieBean{
