@@ -16,7 +16,9 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.IPieDataSet;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +27,7 @@ import java.util.List;
  * Created by admin on 2016/12/2.
  */
 
-public class PieFragemt extends Fragment {
+public class PieFragemt extends Fragment implements OnChartValueSelectedListener {
 
     private static final String DATA_KEY = "PieFragment_key";
     private MonthBean mData;
@@ -60,14 +62,15 @@ public class PieFragemt extends Fragment {
         View inflate = inflater.inflate(R.layout.fragment_pie,null);
         mChart = (PieChart) inflate.findViewById(R.id.pc_chart);
         initView();
-        mChart.getLegend().setEnabled(false);//不显示下面的标识
+        mChart.getLegend().setEnabled(true);//不显示下面的标识
 
         //Description设置为空
         Description description = new Description();
         description.setText("");
         mChart.setDescription(description);
         //设置不许旋转
-        mChart.setRotationEnabled(true);
+        mChart.setRotationEnabled(false);
+        mChart.setOnChartValueSelectedListener(this);
         return inflate;
     }
 
@@ -81,10 +84,10 @@ public class PieFragemt extends Fragment {
         for (int i = 0; i < mData.getObj().size(); i++) {
             MonthBean.PieBean pieBean = mData.getObj().get(i);
             titles.add(pieBean.getTitle());
-            entries.add(new PieEntry(pieBean.getValue()));
+            entries.add(new PieEntry(pieBean.getValue(),titles.get(i)));
         }
 
-        PieDataSet dataSet = new PieDataSet(entries,"");
+        PieDataSet dataSet = new PieDataSet(entries,"hello");
         dataSet.setColors(new int[]{Color.rgb(216, 77, 719), Color.rgb(183, 56, 63), Color.rgb(247, 85, 47)});
         dataSet.setSliceSpace(3f);
         dataSet.setSelectionShift(5f);
@@ -92,6 +95,17 @@ public class PieFragemt extends Fragment {
 
         PieData pieData = new PieData(dataSet);
         mChart.setData(pieData);
+
+    }
+
+    @Override
+    public void onValueSelected(Entry e, Highlight h) { //点击条目显示具体数据的时候调用的方法
+        float angle = 0;
+        mChart.setRotationAngle(angle);
+    }
+
+    @Override
+    public void onNothingSelected() { //点击其他的地方，不显示具体数据的时候调用
 
     }
 }
