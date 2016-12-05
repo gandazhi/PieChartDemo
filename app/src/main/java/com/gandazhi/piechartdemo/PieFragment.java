@@ -4,11 +4,11 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
@@ -17,7 +17,6 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.interfaces.datasets.IPieDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import java.util.ArrayList;
@@ -32,6 +31,7 @@ public class PieFragment extends Fragment implements OnChartValueSelectedListene
     private static final String DATA_KEY = "PieFragment_key";
     private MonthBean mData;
     private PieChart mChart;
+    private TextView tv_Des;
 
     public static PieFragment newInstance(MonthBean data) {
 
@@ -61,8 +61,9 @@ public class PieFragment extends Fragment implements OnChartValueSelectedListene
 
         View inflate = inflater.inflate(R.layout.fragment_pie,null);
         mChart = (PieChart) inflate.findViewById(R.id.pc_chart);
+        tv_Des = ((TextView) inflate.findViewById(R.id.tv_des));
         initView();
-        mChart.getLegend().setEnabled(true);//不显示下面的标识
+        mChart.getLegend().setEnabled(false);//不显示下面的标识
 
         //Description设置为空
         Description description = new Description();
@@ -84,7 +85,7 @@ public class PieFragment extends Fragment implements OnChartValueSelectedListene
         for (int i = 0; i < mData.getObj().size(); i++) {
             MonthBean.PieBean pieBean = mData.getObj().get(i);
             titles.add(pieBean.getTitle());
-            entries.add(new PieEntry(pieBean.getValue(),titles.get(i)));
+            entries.add(new PieEntry(pieBean.getValue()));
         }
 
         PieDataSet dataSet = new PieDataSet(entries,"hello");
@@ -104,11 +105,16 @@ public class PieFragment extends Fragment implements OnChartValueSelectedListene
         int proportion = 360 / mData.getSum();
         int angle = 90 - mData.getObj().get((int) h.getX()).getValue() / 2 * proportion - mData.getSum((int) h.getX()) * proportion;
         mChart.setRotationAngle(angle);
+        update_tvDes(h); //更新TextView 显示数据详情
+    }
 
+    private void update_tvDes(Highlight index) {
+        tv_Des.setVisibility(View.VISIBLE);
+        tv_Des.setText(mData.getObj().get((int) index.getX()).getTitle()+":"+mData.getObj().get((int) index.getX()).getValue());
     }
 
     @Override
     public void onNothingSelected() { //点击其他的地方，不显示具体数据的时候调用
-        
+        tv_Des.setVisibility(View.INVISIBLE);
     }
 }
