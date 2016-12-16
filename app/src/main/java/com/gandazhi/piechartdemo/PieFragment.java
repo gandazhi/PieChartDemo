@@ -72,6 +72,16 @@ public class PieFragment extends Fragment implements OnChartValueSelectedListene
         //设置不许旋转
         mChart.setRotationEnabled(false);
         mChart.setOnChartValueSelectedListener(this);
+        /**
+         * 给view加监听，优化不选中PieChart时显示TextView
+         * 还需要优化让mChart不选中
+         */
+        inflate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tv_Des.setVisibility(View.INVISIBLE);
+            }
+        });
         return inflate;
     }
 
@@ -117,4 +127,6 @@ public class PieFragment extends Fragment implements OnChartValueSelectedListene
     public void onNothingSelected() { //点击其他的地方，不显示具体数据的时候调用
         tv_Des.setVisibility(View.INVISIBLE);
     }
+
+
 }
