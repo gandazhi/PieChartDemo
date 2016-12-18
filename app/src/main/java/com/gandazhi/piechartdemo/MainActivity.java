@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onPageSelected(int position) {
+            public void onPageSelected(int position) {//ViewPager被选中的时候
                 update_btnText();
             }
 
@@ -75,14 +75,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void update_btnText() {
-        if (vp_main.getCurrentItem()!=vp_main.getAdapter().getCount()-1){
-            btn_next.setText(mData.get(vp_main.getCurrentItem()+1).getDate());
-        }else {
+        if (vp_main.getCurrentItem() != vp_main.getAdapter().getCount() - 1) {
+            btn_next.setText(mData.get(vp_main.getCurrentItem() + 1).getDate());
+        } else {
             btn_next.setText("没有了");
         }
-        if (vp_main.getCurrentItem() != 0){
-            btn_last.setText(mData.get(vp_main.getCurrentItem() -1).getDate());
-        }else {
+        if (vp_main.getCurrentItem() != 0) {
+            btn_last.setText(mData.get(vp_main.getCurrentItem() - 1).getDate());
+        } else {
             btn_last.setText("没有了");
         }
     }
