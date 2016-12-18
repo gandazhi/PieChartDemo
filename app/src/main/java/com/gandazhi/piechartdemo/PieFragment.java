@@ -62,9 +62,10 @@ public class PieFragment extends Fragment implements OnChartValueSelectedListene
         View inflate = inflater.inflate(R.layout.fragment_pie,null);
         mChart = (PieChart) inflate.findViewById(R.id.pc_chart);
         tv_Des = ((TextView) inflate.findViewById(R.id.tv_des));
+
         initView();
         mChart.getLegend().setEnabled(false);//不显示下面的标识
-
+        mChart.getData().getDataSet().setDrawValues(false);
         //Description设置为空
         Description description = new Description();
         description.setText("");

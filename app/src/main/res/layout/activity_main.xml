@@ -8,4 +8,19 @@
         android:id="@+id/vp_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_last"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/btn_left"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_next"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/btn_right"/>
 </RelativeLayout>

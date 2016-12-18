@@ -16,9 +16,10 @@
 
     </com.gandazhi.piechartdemo.MyPieChart>
 
+
     <TextView
-        android:id="@+id/tv_des"
         android:layout_below="@+id/pc_chart"
+        android:id="@+id/tv_des"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="invisible"
@@ -28,4 +29,5 @@
         android:text="demo"
         android:layout_marginTop="10dp"
         app:layout_widthPercent="80%"/>
+
 </android.support.percent.PercentRelativeLayout>
